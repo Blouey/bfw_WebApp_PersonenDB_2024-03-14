@@ -1,0 +1,64 @@
+﻿@model bfw_WebApp_PersonenDB_2024_03_14.Models.Person
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width ; initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <title>Details @Model.Pid</title>
+    <style>
+    .head-con {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                border-bottom: 1px groove;
+                padding-bottom: 0.5em;
+            }
+    #homeLink{
+                position: relative;
+                right: 3em;
+                text-decoration: none;
+                align-self: flex-end;
+            }
+      </style>
+</head>
+<body>
+<div class="view-con">
+    <div class="head-con">
+            <h1>Home-Details </h1>
+            <a id="homeLink" href="/home/index" title="Zurück">🔙<button type="button">Home</button></a>
+    </div>
+    
+    <div class="detail-con">
+        <h1>Details</h1>
+        <img src="/uploads/@Model.Bild" alt="Bild von @Model.Vorname @Model.Nachname" width="100" height="100"/><br/>
+
+        <sub>ID: @Model.Pid</sub>
+
+        <p font-size="18">
+            <strong>Vorname: </strong>
+            @Model.Vorname
+            <br/>
+            <strong>Nachname: </strong>
+            @Model.Nachname
+        </p>
+
+        <p>
+            <strong>Geburtsdatum: </strong>
+            @(Model.Geburtsdatum != null ? Model.Geburtsdatum : "unbekannt")
+            <br/>
+            <strong>Alter: </strong>
+            @Model.GetAge()
+        </p>
+
+
+    </div>
+
+</div>
+</body>
+</html>

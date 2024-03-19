@@ -1,0 +1,99 @@
+﻿@model bfw_WebApp_PersonenDB_2024_03_14.Models.UploadModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width ; initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <title>Create</title>
+    <style>
+            .head-con {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        border-bottom: 1px groove;
+                        padding-bottom: 0.5em;
+                    }
+    
+            button {
+                padding: .2em;
+                margin: .4em 0;
+                border-radius: 5px;
+                color: white;
+                font-size: 1em;
+            }
+            button:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+                transition: transform .3s;
+            }
+            input[type="file"] {
+                padding: .2em;
+                margin: .4em 0;
+                border-radius: 5px;
+                font-size: 1em;
+                text-align: center;
+            }
+            /*hover effect on input type upload */        
+            input[type="file"]:hover {
+                cursor: pointer;
+            }   
+            input[type="file"]::file-selector-button{
+            transition: transform .3s;
+            }
+            input[type="file"]:hover::file-selector-button {
+                transform: scale(1.05);
+            }
+            .error{
+                color: red;
+                border-radius: 5px;
+                background-color: rgba(246,134,134,0.53);
+            }
+          
+      </style>
+</head>
+<body>
+<div class="view-con">
+    <div class="head-con">
+        <h1>Admin-Create 🔒</h1>
+        <a id="homeLink" href="/home/index" title="Zurück">🔙<button type="button">Home</button></a>
+    </div>
+
+    <div class="content-con">
+
+        <h1>Create</h1>
+        <form action="/admin/create" method="post" enctype="multipart/form-data">
+            <label asp-for="PersonModel.Vorname"></label>
+            <input asp-for="PersonModel.Vorname"/>
+            <span asp-validation-for="PersonModel.Vorname" class="error"></span><br/>
+            <label asp-for="PersonModel.Nachname"></label>
+            <input asp-for="PersonModel.Nachname"/>
+            <span asp-validation-for="PersonModel.Nachname" class="error"></span><br/>
+            <label asp-for="PersonModel.Geburtsdatum"></label>
+            <input asp-for="PersonModel.Geburtsdatum" type="date"/>
+            <span asp-validation-for="PersonModel.Geburtsdatum" class="error"></span><br/>
+            <label asp-for="PersonModel.Groesse"></label>
+            <input asp-for="PersonModel.Groesse" type="number"/>cm
+            <span asp-validation-for="PersonModel.Groesse" class="error"></span><br/>
+            <label asp-for="Uploaddatei"></label>
+            <input asp-for="Uploaddatei" type="file" accept="image/*"/>
+            <span asp-validation-for="Uploaddatei" class="error"></span><br/>
+            <label asp-for="PersonModel.Gewicht"></label>
+            <input asp-for="PersonModel.Gewicht" type="number" step="0.1"/>
+            <span asp-validation-for="PersonModel.Gewicht" class="error"></span><br/> <br/>
+
+            <button type="submit" style="background-color: rgba(112,232,112,0.65)">Submit</button>
+            <button type="reset" style="background-color: rgba(238,100,100,0.65)">Reset</button>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿@model List<bfw_WebApp_PersonenDB_2024_03_14.Models.Person>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width ; initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <title>Admin-Index</title>
+    <style>
+     .head-con {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                border-bottom: 1px groove;
+                padding-bottom: 0.5em;
+            }
+    .content-con{
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+                padding: 10px;
+            }
+            
+    button:hover{
+                cursor: pointer;
+                transform: scale(1.01);
+            }
+    #homeLink{
+                position: relative;
+                right: 3em;
+                text-decoration: none;
+                align-self: flex-end;
+    }
+    #btn-add{
+                padding: .2em;
+                margin: .6em 0;
+                border-radius: 5px;
+                font-size: 1em;
+            }
+          
+      </style>
+</head>
+<body>
+<div class="view-con">
+
+    <div class="head-con">
+        <h1>Admin-Index 🔒</h1>
+        <a id="homeLink" href="/home/index" title="Zurück">🔙<button type="button">Home</button></a>
+    </div>
+
+    <div class="content-con">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Geburtsdatum</th>
+                <th>Alter</th>
+                <th>Bild</th>
+                <th>Größe</th>
+                <th>Gewicht</th>
+                <th >Details/Edit/Delete</th>
+            </tr>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.Pid</td>
+                    <td>@person.Vorname</td>
+                    <td>@person.Nachname</td>
+                    <td>@(person.Geburtsdatum != null ? person.Geburtsdatum : "unbekannt")</td>
+                    <td>@person.GetAge()</td>
+                    <td>
+                        <img src="/uploads/@person.Bild" alt="Bild von @person.Vorname @person.Nachname" width="100" height="100"/>
+                    </td>
+                    <td>@person.Groesse</td>
+                    <td>@person.Gewicht</td>
+                    <td nowrap="nowrap">
+                        <a href="/home/details/?pid=@person.Pid" title="Details">🔍</a>
+                        <a href="/admin/edit/?pid=@person.Pid" title="Edit">✏️</a>
+                        <a href="/admin/delete/?pid=@person.Pid" title="Delete">❌</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <button id="btn-add" type="button" onclick="window.location.href ='/admin/create'">Create new Person ➕</button>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿@using bfw_WebApp_PersonenDB_2024_03_14.Models
+@model List<Person>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta name="viewport" content="width=device-width ; initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+    <title>Index</title>
+    <style>
+        .head-con {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px groove;
+            padding-bottom: 0.5em;
+        }
+        
+        .card-con{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .card{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            width: auto;
+            align-items: center;
+            justify-content: space-evenly;
+            background-color: lightblue;
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 30ms;
+        }
+        .card:hover{
+            background-color: lightgreen;
+            cursor: pointer;
+            transform: scale(1.01);
+        }
+        #admLink{
+            position: relative;
+            right: 3em;
+            text-decoration: none;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+<div class="view-con">
+    <div class="head-con">
+        <h1>Personen DB</h1>
+        <a id="admLink" href="/admin/index" title="Admin">🔒<button type="button">Admin</button></a>
+    </div>
+    <div class="card-con">
+        @foreach (var item in Model)
+        {
+            <div class="card" onclick="window.location.href = '/home/details/?pid=@item.Pid'" title="Details" >
+                <h2>@item.Vorname @item.Nachname</h2>
+                <img src="/uploads/@item.Bild" alt="Bild von @item.Vorname @item.Nachname" width="100" height="100"/><br/>
+                <sub>ID: @item.Pid</sub>
+                <p>
+                    <strong>Alter:</strong>
+                    @item.GetAge()
+                </p>
+
+
+            </div>
+        }
+    </div >
+</div>
+</body >
+</html >
